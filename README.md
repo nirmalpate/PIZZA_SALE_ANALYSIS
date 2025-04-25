@@ -3,6 +3,47 @@
 I HAVE ANALYSED THE PIZZA SALES. THERE ARE FOUR TABLES AND QUERIES ARE BASED ON BASIC INTERMEDIATE AND ADVANCED.
 i HAVE ADDRESSED VARIOUS BUSINESS QUESTIONS.
 
+FIRST I HAVE EXTRACTED THE DATA FROM DIFFERENT SOURCES. THEN I HAVE UPLOADED THE DATA IN PYTHON. THEN USING SQLALCHEMY, I HAE UPLOADED TO MYSQL. 
+THEN I HAVE ADDRESSED THE BUSINESS PROBLEM.
+PYTHON CODE:
+
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("C:/Users/ADM/Desktop/pizza_sales/order_details.csv")
+
+df.info()
+df1 = pd.read_csv("C:/Users/ADM/Desktop/pizza_sales/orders.csv", encoding='latin1')
+df2 = pd.read_csv("C:/Users/ADM/Desktop/pizza_sales/pizza_types.csv", encoding='latin1')
+df3 = pd.read_csv("C:/Users/ADM/Desktop/pizza_sales/pizzas.csv", encoding='latin1')
+
+df
+
+df3
+
+from sqlalchemy import create_engine
+db_user = 'root'
+db_password = '0000'
+db_host = 'localhost'
+db_port = '3306'
+db_name = 'pop'
+
+connection_string = f"mysql+mysqlconnector://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+
+engine = create_engine(connection_string)
+
+engine
+
+df.to_sql('order_details',engine, if_exists = 'replace', index = False)
+
+df1.to_sql('orders',engine, if_exists = 'replace', index = False)
+
+df2.to_sql('pizza_types',engine, if_exists = 'replace', index = False)
+
+df3.to_sql('pizzas',engine, if_exists = 'replace', index = False)
+
+# SQL
+
 #Retrieve the total number of orders placed.
 # SQL ANALYSIS
 select  distinct count(*) as Total_Orders
